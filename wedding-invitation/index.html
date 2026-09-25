@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="hy"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Գեղամ &amp; Մանե · Հարսանեկան հրավիրատոմս</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Աուդիո ֆայլը -->
+<audio id="bg-music" src="music/Nuvole Bianche.mp3" loop></audio>
+
+<!-- Երաժշտության միացման/անջատման կոճակը -->
+<button id="music-toggle" class="music-btn" aria-label="Միացնել/Անջատել երաժշտությունը">
+  <span id="music-icon">🎵</span>
+</button>
+<!-- ===== 1. Բանալու բացման էկրան ===== -->
+<div id="intro"><div id="bgb"></div><div id="stage"><div id="art"></div><div id="glow"></div><div id="key"></div></div>
+<div id="hint">ՍԵՂՄԵՔ ԲԱՆԱԼՈՒՆ</div></div>
+
+<main id="inv">
+<!-- ===== 2. Գլխավոր էկրան ===== -->
+<section class="hero"><canvas id="sp"></canvas>
+<div class="frame rv"><i></i><i></i><i></i><i></i>
+<div class="arch"><img src="images/photo1.jpg" alt="Գեղամ և Մանե"></div>
+<h1>Գեղամ<span>&amp;</span>Մանե</h1><div class="orn"></div>
+<div class="date">1 նոյեմբերի, 2026</div></div>
+<div class="scroll"></div></section>
+
+<!-- ===== Փոքրիկ օրացույց՝ նշված է Նոյեմբերի 1-ը ===== -->
+
+<!-- ===== 3. Ողջույնի խոսք ===== -->
+<section><div class="small rv">Սիրելի հյուր</div>
+<h2 class="rv">Ձեզ ենք սպասում</h2>
+<p class="lead rv">Կան օրեր, որոնք հավերժ դրոշմվում են մեր հիշողության մեջ: Մեր կյանքի ամենակարևոր և հիշարժան օրը ցանկանում ենք կիսել հենց Ձեզ հետ՝ մեր թանկագին մարդկանց կողքին, ովքեր մեր երջանկության անբաժանելի մասն են: </p>
+<div class="small rv">Սիրով սպասում ենք Ձեզ:</div>
+<g transform="translate(-6,0)"><circle cx="82" cy="52" r="6"/><path d="M88,53 L98,56"/><path d="M78,48 C60,40 40,42 24,58"/><path d="M78,56 C62,66 48,78 40,92"/><path d="M68,46 Q50,28 30,34 Q46,36 54,48 Q36,44 20,50 Q40,50 52,58"/><path d="M40,92 L28,100 M45,88 L38,100 M50,86 L48,98"/></g>
+<g transform="translate(206,0) scale(-1,1)"><circle cx="82" cy="52" r="6"/><path d="M88,53 L98,56"/><path d="M78,48 C60,40 40,42 24,58"/><path d="M78,56 C62,66 48,78 40,92"/><path d="M68,46 Q50,28 30,34 Q46,36 54,48 Q36,44 20,50 Q40,50 52,58"/><path d="M40,92 L28,100 M45,88 L38,100 M50,86 L48,98"/></g>
+<path d="M100,58 C97,53 90,53 90,59 C90,64 100,70 100,70 C100,70 110,64 110,59 C110,53 103,53 100,58 Z" stroke-width="1.3"/>
+</svg>
+</div>
+
+<div id="cd" class="rv"></div></section>
+
+<!-- ===== 4. Մեր պատմությունը (լուսանկարներ) ===== -->
+<section><h2 class="rv">Երբ երկու սիրտ գտնում են իրար</h2>
+<div class="story">
+<div class="row"><div class="pic rv"><img src="images/hayacq.jpg" alt="" decoding="async"></div>
+<div class="rv" style="--d:.2s"><h3>Ամեն ինչ սկսվեց մի հայացքից…</h3><p>Կան հանդիպումներ, որոնք պատահական չեն լինում․ դրանք ճակատագրի ամենագեղեցիկ նվերն են։</p></div></div>
+<div class="row"><div class="pic rv"><img src="images/photo2.jpg" alt="" decoding="async"></div>
+<div class="rv" style="--d:.2s"><h3>Մի խոստում՝ ամբողջ կյանքի համար</h3><p>Իրար կողքի լինելու, իրար լրացնելու ու անսահման սիրելու որոշումը մեր սրտերի ամենաանկեղծ ընտրությունն է։</p></div></div>
+</div></section>
+
+
+<!-- ===== 5. Մեջբերում լուսանկարի վրա ===== -->
+<!-- ===== 5. Մեջբերում լուսանկարի վրա ===== -->
+<section class="band">
+  <div class="band-content">
+    <div class="band-orn rv">♡</div>
+    <blockquote class="rv">Երջանկությունը կրկնապատկվում է, երբ այն կիսում ես սիրելի մարդկանց հետ։</blockquote>
+    <div class="band-orn rv">♡</div>
+  </div>
+</section>
+<!-- ===== 6. Օրացույց և Ծրագիր ===== -->
+<section>
+  <h2 class="rv">Օրվա ընթացքը</h2>
+
+  <div class="day-program-wrapper rv">
+    <!-- Ձախ կողմ՝ Օրացույց -->
+    <div class="cal">
+      <div class="cal-head">Նոյեմբեր 2026</div>
+      <div class="cal-grid">
+        <span class="dow">Երկ</span><span class="dow">Երք</span><span class="dow">Չրք</span><span class="dow">Հնգ</span><span class="dow">Ուր</span><span class="dow">Շբթ</span><span class="dow">Կիր</span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span class="cal-day">1<i>♡</i></span>
+        <span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
+        <span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+        <span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span>
+        <span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span>
+        <span>30</span>
+      </div>
+    </div>
+
+    <!-- Աջ կողմ՝ Օրվա ժամանակացույցը -->
+    <div class="tl">
+      <div>
+        <em>Պսակադրություն</em>
+        <b>13:30</b>
+        <p>Հաղարծին վանական համալիր</p>
+        <a class="btn f" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Haghartsin+Monastery" style="margin-top: 10px; display: inline-flex;">
+          Տեսնել քարտեզի վրա
+        </a>
+      </div>
+
+      <div>
+        <em>Հարսանեկան խնջույք</em>
+        <b>17:00</b>
+        <p>Գինաց Hall</p>
+        <a class="btn f" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Gyinats+Hall+Armenia" style="margin-top: 10px; display: inline-flex;">
+          Տեսնել քարտեզի վրա
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ===== 8. Հաստատում ===== -->
+<section class="rsvp-section">
+  <h2 class="rv">Ձեր ներկայությունը մեր օրվա ամենամեծ նվերն է</h2>
+  <div class="small rv">Սպասում ենք ձեզ</div>
+  <p class="deadline rv">Խնդրում ենք լրացնել մինչև <b>20.10.2026</b></p>
+</section>
+  <form id="f" class="rv" novalidate>
+    <label>Ձեր Անուն Ազգանունը</label>
+    <input type="text" id="nm" placeholder="Անուն Ազգանուն" autocomplete="name">
+
+    <label>Ո՞ւմ կողմից եք հյուր</label>
+    <div class="ch">
+      <label>
+        <input type="radio" name="side" value="Հարսի կողմ" checked>
+        <span>Հարսի կողմից</span>
+      </label>
+      <label>
+        <input type="radio" name="side" value="Փեսայի կողմ">
+        <span>Փեսայի կողմից</span>
+      </label>
+    </div>
+    <label>Կկարողանա՞ք ներկա գտնվել</label>
+    <div class="ch">
+      <label><input type="radio" name="a" value="yes" checked>Այո 🥂</label>
+      <label><input type="radio" name="a" value="no">Ցավոք, չենք կարող</label>
+    </div>
+
+    <div id="gw">
+      <label>Անձանց քանակը</label>
+      <div class="st">
+        <button type="button" id="mi">−</button>
+        <b id="ct">1</b>
+        <button type="button" id="pl">+</button>
+      </div>
+    </div>
+
+    <div class="err" id="er"></div>
+
+    <div style="text-align:center">
+      <button type="submit" class="btn f">ՀԱՍՏԱՏԵԼ</button>
+    </div>
+
+    <div id="ok">
+      <h2>Շնորհակալություն ♡</h2>
+      <p>Ձեր պատասխանը ուղարկված է։ Շուտով կհանդիպենք։</p>
+    </div>
+  </form>
+</section>
+
+<footer>Սիրով՝ Գեղամ և Մանե<br>01.11.2026 ♡</footer>
+</main>
+<script src="script.js"></script>
+</body>
+</html>

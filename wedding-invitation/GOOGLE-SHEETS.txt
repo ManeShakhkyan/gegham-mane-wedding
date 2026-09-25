@@ -1,0 +1,16 @@
+ՀԱՍՏԱՏՈՒՄՆԵՐԸ GOOGLE SHEETS-ՈՒՄ ՏԵՍՆԵԼՈՒ ՀԱՄԱՐ (մեկ անգամվա կարգավորում, ~3 րոպե)
+
+1. Բացեք ձեր Google Sheet-ը -> վերևի մենյուից՝ Extensions (Ընդլայնումներ) -> Apps Script
+2. Ջնջեք եղած կոդը և տեղադրեք Code.gs ֆայլի ամբողջ պարունակությունը -> Ctrl+S
+3. Վերևում սեղմեք Deploy -> New deployment
+     - Type (gear պատկերակ)՝ Web app
+     - Execute as: Me
+     - Who has access: Anyone
+     - Deploy -> Authorize access -> ընտրեք ձեր հաշիվը -> Advanced -> Go to ... (unsafe) -> Allow
+       (Google-ը այսպես է զգուշացնում ցանկացած ձեր սեփական սքրիպտի համար, նորմալ է)
+4. Պատճենեք ստացված "Web app URL"-ը (սկսվում է https://script.google.com/macros/s/...)
+5. Բացեք script.js-ը և տեղադրեք այն SHEET_URL-ի մեջ՝
+     const SHEET_URL='https://script.google.com/macros/s/.../exec';
+6. Փորձարկեք ձևը՝ Sheet-ում կստեղծվի «Հաստատումներ» էջ գեղեցիկ վերնագրով, և յուրաքանչյուր պատասխան կավելանա նոր տողով։
+
+Եթե հետո փոխեք Code.gs-ը, պետք է Deploy -> Manage deployments -> Edit (մատիտ) -> Version: New version -> Deploy (URL-ը մնում է նույնը)։

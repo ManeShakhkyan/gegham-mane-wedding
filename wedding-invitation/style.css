@@ -1,0 +1,449 @@
+/* ===== Հարսանեկան հրավիրատոմսի ոճերը =====
+   Գույները փոխելու համար փոխեք ներքևի --gold, --paper, --ink արժեքները */
+:root{--bgimg:url(images/bg.jpg);--gold:#b8893a;--gold2:#e2bf72;--ink:#4a3a22;--paper:#f6eedb;box-sizing:border-box}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--paper);color:var(--ink);font-family:'Noto Serif Armenian','Cormorant Garamond',Georgia,serif;overflow:hidden;-webkit-text-size-adjust:100%}
+body.open{overflow:auto}
+/* intro */
+#intro{position:fixed;inset:0;background:#efe3c8;z-index:10;overflow:hidden;transition:opacity 1.2s ease .5s;will-change:opacity}
+#stage{position:absolute;left:0;top:0;transform-origin:49.9% 37.6%;will-change:transform,opacity;backface-visibility:hidden;transition:transform 2.2s cubic-bezier(.6,0,.9,.4),opacity 1.4s ease .6s}
+#glow{position:absolute;left:49.9%;top:37.6%;width:40%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:radial-gradient(circle,#fff6c8 0,#f3cf75 30%,transparent 68%);opacity:0;transition:opacity .9s}
+#key{will-change:transform;position:absolute;left:23.4%;top:64%;width:52.5%;height:16.1%;background:url(images/key.png) center/100% 100%;transform-origin:96.4% 50.3%;transition:transform 2.4s cubic-bezier(.5,.05,.25,1);cursor:pointer;filter:drop-shadow(0 3px 4px rgba(90,60,10,.35));animation:float 2.4s ease-in-out infinite}
+@keyframes float{50%{translate:0 -6px}}
+#hint{position:fixed;left:0;right:0;bottom:calc(28px + env(safe-area-inset-bottom,0px));text-align:center;letter-spacing:.18em;font-size:14px;color:var(--gold);animation:pulse 2s infinite;transition:opacity .5s}
+@keyframes pulse{50%{opacity:.35}}
+#intro.done{opacity:0;pointer-events:none}
+#intro.done #stage{transform:scale(4);opacity:0}
+.shake{animation:shake .5s 2}
+@keyframes shake{25%{rotate:-4deg}75%{rotate:4deg}}
+/* invitation */
+#inv{position:relative;background:linear-gradient(#fbf6ea,var(--paper) 40%,#f2e7cd)}
+section{position:relative;padding:clamp(56px,10vw,110px) 20px;text-align:center;max-width:920px;margin:0 auto}
+.small{letter-spacing:.32em;font-size:clamp(10px,2.8vw,13px);color:var(--gold);text-transform:uppercase}
+h2{font-weight:300;font-size:clamp(26px,6vw,38px);margin:14px 0 8px;color:var(--gold)}
+p{line-height:1.8;font-weight:300;margin:6px 0;font-size:clamp(15px,3.6vw,17px)}
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;max-width:none}
+#sp{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.frame{position:relative;padding:clamp(40px,9vw,70px) clamp(24px,7vw,64px);border:1px solid var(--gold2);width:min(100%,560px);background:rgba(255,255,255,.4)}
+.frame:before{content:"";position:absolute;inset:8px;border:1px solid var(--gold2);pointer-events:none}
+.frame i{position:absolute;width:14px;height:14px;background:var(--gold2);rotate:45deg}
+.frame i:nth-child(1){left:-8px;top:-8px}.frame i:nth-child(2){right:-8px;top:-8px}.frame i:nth-child(3){left:-8px;bottom:-8px}.frame i:nth-child(4){right:-8px;bottom:-8px}
+h1{font-weight:300;font-size:clamp(40px,12vw,72px);margin:26px 0 14px;line-height:1.15;background:linear-gradient(100deg,#9a6f22,#e6c274 45%,#9a6f22 70%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+h1 span{display:block;font-size:.4em;-webkit-text-fill-color:var(--gold);margin:2px 0}
+@keyframes shine{to{background-position:-200% 0}}
+.date{font-size:clamp(20px,5vw,28px);font-weight:400;margin-top:8px}
+.orn {
+  height: 14px;
+  margin: 26px auto;
+  width: min(220px, 60%);
+  /* Գիծը մեջտեղից (40%-ից 60% հատվածում) դարձնում ենք թափանցիկ (transparent) */
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gold2) 20%,
+    transparent 42%,
+    transparent 58%,
+    var(--gold2) 80%,
+    transparent 100%
+  ) center/100% 1px no-repeat;
+  position: relative;
+}
+
+.orn:after {
+  content: "♡";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  background: transparent; /* Ֆոնը թափանցիկ է */
+  padding: 0;
+  color: var(--gold);
+}
+
+/* Container, որը կողք-կողքի է դնում օրացույցը (ձախից) և ծրագիրը (աջից) */
+.day-program-wrapper {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  max-width: 900px;
+  margin: 30px auto 0 auto;
+  padding: 0 15px;
+}
+
+/* Չափսերի հավասարեցում */
+.day-program-wrapper .tl,
+.day-program-wrapper .cal {
+  flex: 1;
+  margin: 0 !important;
+  width: 100%;
+}
+
+/* Հեռախոսների (մոբայլ) համար՝ իրար տակ դասավորություն */
+@media (max-width: 768px) {
+  .day-program-wrapper {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+.scroll{position:absolute;bottom:22px;left:50%;translate:-50% 0;width:1px;height:46px;background:linear-gradient(var(--gold),transparent);animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+#cd{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,3vw,18px);max-width:520px;margin:26px auto 0}
+#cd div{padding:clamp(12px,3vw,20px) 4px;border:1px solid var(--gold2);background:rgba(255,255,255,.5)}
+#cd b{display:block;font:400 clamp(26px,8vw,44px) 'Cormorant Garamond',serif;color:var(--gold)}
+#cd small{font-size:clamp(10px,2.6vw,12px);letter-spacing:.1em}
+.tl{position:relative;max-width:640px;margin:34px auto 0;text-align:left;padding-left:34px}
+.tl:before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:1px;background:var(--gold2);transform:scaleY(0);transform-origin:top;transition:transform 1.8s ease}
+.tl.in:before{transform:none}
+.tl>div{position:relative;margin-bottom:34px}
+.tl>div:before{content:"";position:absolute;left:-34px;top:9px;width:11px;height:11px;background:var(--paper);border:1px solid var(--gold);rotate:45deg}
+.tl b{display:block;font-weight:400;font-size:clamp(18px,4.5vw,22px)}.tl em{font-style:normal;color:var(--gold);letter-spacing:.12em;font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:20px;margin-top:30px}
+.pl{border:1px solid var(--gold2);background:rgba(255,255,255,.5);padding:0 0 22px;overflow:hidden}
+.map{height:150px;position:relative;background:#eadfc3 repeating-linear-gradient(35deg,transparent 0 22px,rgba(184,137,58,.13) 22px 23px),repeating-linear-gradient(-55deg,transparent 0 30px,rgba(184,137,58,.13) 30px 31px);margin-bottom:18px}
+.map svg{position:absolute;left:50%;top:50%;translate:-50% -62%;width:44px;animation:bob 2s ease-in-out infinite}
+.map:after{content:"";position:absolute;left:50%;top:66%;width:34px;height:9px;translate:-50% 0;border-radius:50%;background:rgba(90,60,10,.25);animation:sh 2s ease-in-out infinite}
+@keyframes bob{50%{translate:-50% -78%}}@keyframes sh{50%{scale:.6;opacity:.5}}
+.pl h3{margin:0 0 4px;font-weight:400;font-size:20px}.pl p{padding:0 16px}
+.btn{display:inline-block;margin:12px 5px 0;padding:12px 22px;border:1px solid var(--gold);color:var(--gold);background:transparent;text-decoration:none;letter-spacing:.06em;font:400 14px 'Noto Serif Armenian',serif;cursor:pointer;transition:.3s}
+.btn:hover,.btn.f{background:var(--gold);color:#fff}
+form{max-width:520px;margin:30px auto 0;text-align:left;border:1px solid var(--gold2);padding:clamp(20px,5vw,34px);background:rgba(255,255,255,.55)}
+label{display:block;font-size:13px;letter-spacing:.08em;color:var(--gold);margin:16px 0 6px}
+input[type=text],textarea{width:100%;padding:12px;border:1px solid var(--gold2);background:#fffdf7;font:16px 'Noto Serif Armenian',serif;color:var(--ink);border-radius:0}
+input:focus,textarea:focus{outline:2px solid var(--gold2)}
+.ch{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ch label{margin:0;padding:12px 6px;border:1px solid var(--gold2);text-align:center;cursor:pointer;color:var(--ink);letter-spacing:0;font-size:14px}
+.ch input{display:none}.ch input:checked+span{color:#fff}
+.ch label:has(input:checked){background:var(--gold);color:#fff}
+.st{display:flex;align-items:center;gap:14px}.st button{width:42px;height:42px;border:1px solid var(--gold);background:none;color:var(--gold);font-size:22px;cursor:pointer}.st b{min-width:30px;text-align:center;font-size:20px;font-weight:400}
+#send{display:none;text-align:center}#send.on{display:block}
+#ok{display:none;text-align:center;padding:30px 0}#ok.on{display:block;animation:pop .8s}
+@keyframes pop{from{opacity:0;scale:.9}}
+.err{color:#a5432b;font-size:13px;min-height:18px;margin-top:8px}
+footer{padding:40px 20px calc(50px + env(safe-area-inset-bottom,0px));text-align:center;color:var(--gold)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}}
+#bgb{position:absolute;inset:0;background:url(images/bg-blur.jpg) center/cover}
+#art{position:absolute;inset:0;background:var(--bgimg) center/100% 100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent),linear-gradient(transparent,#000 8%,#000 92%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent),linear-gradient(transparent,#000 8%,#000 92%,transparent);mask-composite:intersect}
+/* ===== Նոր բաժիններ՝ պատմություն և լուսանկարներ ===== */
+.lead{max-width:600px;margin:18px auto 0;font-size:clamp(16px,4vw,19px);line-height:2}
+.arch {
+  width: clamp(180px, 50vw, 250px);
+  aspect-ratio: 3/4;
+  margin: 0 auto 6px;
+  border-radius: 999px 999px 0 0;
+  overflow: hidden;
+  border: 1px solid var(--gold2);
+  padding: 5px;
+  background: #fffdf7;
+}.arch img{width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:999px 999px 0 0;display:block}
+.story{display:grid;gap:clamp(48px,9vw,90px);margin-top:44px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,5vw,54px);align-items:center;text-align:left}
+.row:nth-child(even) .pic{order:2}
+.row h3{font-weight:300;font-size:clamp(22px,5vw,30px);color:var(--gold);margin:10px 0 12px;line-height:1.3}
+.pic{position:relative;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--gold2);padding:8px;background:#fffdf7}
+.pic img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;clip-path:inset(0 0 100% 0);transform:scale(1.18);transition:clip-path 1.6s cubic-bezier(.7,0,.2,1),transform 2.6s cubic-bezier(.2,.7,.2,1)}
+.pic.in img{clip-path:inset(0);transform:scale(1)}
+@media(max-width:700px){.row{grid-template-columns:1fr;text-align:center}.row:nth-child(even) .pic{order:0}.pic{max-width:340px;margin:0 auto}}
+.band {
+  max-width: none;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-image: linear-gradient(rgba(45,28,8,.55), rgba(45,28,8,.62)), url(images/photo3.jpg);
+  background-position: center 55%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.band blockquote{margin:0;max-width:640px;font-weight:300;font-size:clamp(22px,5.6vw,34px);line-height:1.6}
+.band .orn:after {
+  background: transparent;
+  padding: 0;
+}
+.pl .btn{margin-bottom:0}
+
+
+form.sent>*:not(#ok){display:none}
+form .btn:disabled{opacity:.6;cursor:default}
+
+/* ===== Զարդանկարներ (սիմվոլներ) ===== */
+.sym-pair{display:flex;justify-content:center;align-items:flex-end;gap:clamp(28px,8vw,70px);margin:8px auto 0}
+.sym-pair svg{width:clamp(58px,15vw,92px);height:auto;color:var(--gold2)}
+.sym-doves{display:block;width:clamp(150px,36vw,230px);height:auto;margin:22px auto;color:var(--gold2)}
+.sym-rings{display:block;width:clamp(74px,18vw,108px);height:auto;margin:0 auto 6px;color:var(--gold2)}
+.sym-couple{display:block;width:clamp(92px,22vw,138px);height:auto;margin:0 auto 16px;color:var(--gold2)}
+
+/* ===== ԹՈՒՅՆ ՈՒ ՇՔԵՂ ՕՐԱՑՈՒՅՑ ===== */
+.day-program-wrapper .cal {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(253, 248, 240, 0.6));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.5); /* Ոսկեգույն նուրբ եզրագիծ */
+  border-radius: 24px;
+  padding: 28px 22px;
+  box-shadow: 0 15px 35px rgba(212, 175, 55, 0.12), 0 5px 15px rgba(0, 0, 0, 0.04);
+  font-family: 'Cormorant Garamond', serif;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ամսվա վերնագիրը (ՆՈՅԵՄԲԵՐ 2026) */
+.cal-head {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #5a4a3a;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  position: relative;
+}
+
+/* Օրացույցի ցանցը */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+
+/* Շաբաթվա օրերը (Երկ, Երք...) */
+.dow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #8c7b6c;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
+}
+
+/* Ամսաթվերի թվերը */
+.cal-grid span:not(.dow) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  font-size: 1.15rem;
+  color: #4a3e3d;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Հովեր էֆեկտ թվերի վրա */
+.cal-grid span:not(.dow):not(.cal-day):hover {
+  background: rgba(212, 175, 55, 0.15);
+  color: #d4af37;
+  transform: translateY(-2px);
+}
+
+/* ===== ՆՈՅԵՄԲԵՐԻ 1-Ի ՀԱՏՈՒԿ (ՍՐՏԻԿՈՎ) ՕՐԸ ===== */
+.cal-day {
+  background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%) !important;
+  color: #ffffff !important;
+  font-weight: bold;
+  position: relative;
+  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.5);
+  transform: scale(1.12);
+  z-index: 2;
+}
+
+/* Փոքրիկ սրտիկը 1 թվի վրա */
+.cal-day i {
+  position: absolute;
+  top: -8px;
+  right: -5px;
+  font-style: normal;
+  font-size: 0.75rem;
+  color: #e74c3c;
+  background: #ffffff;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  animation: heartPulse 1.8s infinite ease-in-out;
+}
+
+/* Սրտիկի թարթող (Pulse) անիմացիան */
+@keyframes heartPulse {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.25); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.25); }
+  70% { transform: scale(1); }
+}
+
+/* ===== ԵՐԱԺՇՏՈՒԹՅԱՆ ԿՈՃԱԿԻ ՈՃԵՐԸ ===== */
+.music-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: #d4af37;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+  transform: scale(1.1);
+  background: #ffffff;
+}
+
+/* Անիմացիա, երբ երաժշտությունը նվագում է */
+.music-btn.playing {
+  animation: rotateMusic 4s linear infinite;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+}
+
+@keyframes rotateMusic {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Երբ անջատված է, նոտան մի քիչ մգանում է ու վրան թեք գիծ է գալիս */
+.music-btn:not(.playing) #music-icon {
+  opacity: 0.5;
+  position: relative;
+}
+
+.music-btn:not(.playing)::after {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 2px;
+  background-color: #d4af37; /* Ոսկեգույն թեք գիծ */
+  transform: rotate(-45deg);
+  border-radius: 2px;
+}
+
+/* RSVP բաժնի գեղեցիկ ձևավորում */
+/* Ավելի նուրբ ու փոքր տարբերակ */
+.rsvp-section {
+  padding: 25px 15px;
+  text-align: center;
+}
+
+.rsvp-section h2 {
+  font-family: 'Cormorant Garamond', 'Noto Serif Armenian', serif;
+  font-size: clamp(18px, 4vw, 24px); /* Փոքրացրինք տառաչափը */
+  color: var(--gold);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.rsvp-section .small {
+  letter-spacing: 0.15em;
+  font-size: 12px; /* Փոքր տեքստ */
+  color: var(--ink);
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+/* Փոքր ու նուրբ վերջնաժամկետ */
+.deadline {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: var(--gold);
+  border: 1px solid rgba(184, 137, 58, 0.4);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.deadline b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ===== 5. ԲԱՆԵՐ / ՄԵՋԲԵՐՈՒՄ ===== */
+.band {
+  width: 100%;
+  /* Minimum բարձրությունը 250px, բայց հարմարվում է էկրանին */
+  min-height: clamp(250px, 35vh, 400px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+
+  /* Նկարը որպես ֆոն */
+  background: url('images/photo.jpg') center/cover no-repeat attachment-fixed;
+  position: relative;
+}
+
+/* Ֆոնի վրա թեթև մթեցում, որպեսզի տեքստը հեշտ կարդացվի բոլոր էկրաններին */
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25); /* Կարող եք փոխել մթեցման աստիճանը */
+  z-index: 1;
+}
+
+.band-content {
+  position: relative;
+  z-index: 2;
+  max-width: 650px; /* Որպեսզի մեծ էկրաններին տեքստը չափազանց չլայնանա */
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.band blockquote {
+  margin: 15px auto;
+  padding: 0 10px;
+  font-family: 'Cormorant Garamond', 'Noto Serif Armenian', serif;
+  /* Տառաչափն ավտոմատ փոքրանում է հեռախոսի վրա (18px) և մեծանում համակարգչի վրա (28px) */
+  font-size: clamp(18px, 4.5vw, 28px);
+  line-height: 1.5;
+  color: #ffffff; /* Տեքստի գույնը */
+  font-style: italic;
+  font-weight: 400;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); /* Ստվեր, որ տեքստը կարդացվի */
+}
+
+/* Զարդանախշերը (Ornaments) */
+/* Հատուկ զարդանախշ միայն բաների (band) համար */
+.band-orn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px;
+  margin: 15px auto;
+  width: 100%;
+  max-width: 200px;
+  color: var(--gold, #d9b060);
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* Ձախ և աջ ոսկեգույն գծիկները */
+.band-orn::before,
+.band-orn::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--gold, #d9b060);
+  opacity: 0.7;
+}
